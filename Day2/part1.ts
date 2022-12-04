@@ -1,18 +1,18 @@
 import { dataMatrix } from "./data.ts";
 
 const rock = ["A", "X"] as const;
-type Rock = typeof rock[number];
+export type Rock = typeof rock[number];
 const isRock = (r: any): r is Rock => rock.includes(r);
 
 const paper = ["B", "Y"] as const;
-type Paper = typeof paper[number];
+export type Paper = typeof paper[number];
 const isPaper = (p: any): p is Paper => paper.includes(p);
 
 const scissors = ["C", "Z"] as const;
-type Scissors = typeof scissors[number];
+export type Scissors = typeof scissors[number];
 const isScissors = (s: any): s is Scissors => scissors.includes(s);
 
-type Result = "opponent" | "you" | "tie";
+export type Result = "opponent" | "you" | "tie";
 
 const testArray = [
   ["A", "X"],
@@ -35,7 +35,7 @@ const testArray = [
 // r s loss| 1 0 : 1
 // total 55
 
-function checkPair(
+export function whoWins(
   opponent: Rock | Paper | Scissors,
   you: Rock | Paper | Scissors
 ): "opponent" | "you" | "tie" | undefined {
@@ -63,15 +63,15 @@ function checkPair(
   }
 }
 
-function score(
+export function score(
   outcome: Result,
-  winningThrowType: Rock | Paper | Scissors
+  myThrow: Rock | Paper | Scissors
 ): number {
   let output = 0;
   // Rock = 1, Paper = 2, Scissors = 3
-  if (isRock(winningThrowType)) output += 1;
-  if (isPaper(winningThrowType)) output += 2;
-  if (isScissors(winningThrowType)) output += 3;
+  if (isRock(myThrow)) output += 1;
+  if (isPaper(myThrow)) output += 2;
+  if (isScissors(myThrow)) output += 3;
   // win = 6, loss = 0, tie = 3
   if (outcome === "opponent") output += 0;
   if (outcome === "you") output += 6;
@@ -82,7 +82,7 @@ function score(
 let total = 0;
 console.log(`array is ${dataMatrix.length} long`)
 dataMatrix.forEach((tuple) => {
-  const winner = checkPair(
+  const winner = whoWins(
     tuple[0] as Rock | Paper | Scissors,
     tuple[1] as Rock | Paper | Scissors
   );
