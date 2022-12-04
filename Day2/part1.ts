@@ -1,4 +1,4 @@
-import { dataMatrix } from "./Day2/data.ts";
+import { dataMatrix } from "./data.ts";
 
 const rock = ["A", "X"] as const;
 type Rock = typeof rock[number];
