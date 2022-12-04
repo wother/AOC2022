@@ -80,7 +80,6 @@ export function score(
 }
 
 let total = 0;
-console.log(`array is ${dataMatrix.length} long`)
 dataMatrix.forEach((tuple) => {
   const winner = whoWins(
     tuple[0] as Rock | Paper | Scissors,
@@ -88,7 +87,7 @@ dataMatrix.forEach((tuple) => {
   );
   total += score(winner as Result, tuple[1] as Rock | Paper | Scissors);
 });
-console.debug(`total is: ${total}`);
+console.debug(`Part1 total is: ${total}`);
 
 // too high: 11788
 // 11063 - answer
