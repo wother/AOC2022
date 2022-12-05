@@ -4,12 +4,10 @@ import { findSharedCharacters, scorePriority } from "./part1.ts";
 // Split data into thirds
 function splitByuThirds(hugeArray: string[]): any[] {
   const output = [];
-  const groupA = hugeArray.slice(0, 99);
-  const groupB = hugeArray.slice(100, 199);
-  const groupC = hugeArray.slice(200, 299);
-  groupA.forEach((inputStrong, index) => {
-    output.push([inputStrong, groupB[index], groupC[index]]);
-  });
+  for (let index = 0; index < hugeArray.length; index += 3) {
+    const subArray = hugeArray.slice(index, index + 3);
+    output.push(subArray);
+  }
   return output;
 }
 
@@ -30,14 +28,17 @@ function sharedBetweenThree(
 
   let output = "";
   const indices = [];
+  allTheShared.sort();
   allTheShared.forEach((charString) => {
     let idx = allTheShared.indexOf(charString);
+    let increment = 0
     while (idx !== -1) {
       indices.push(idx);
-      idx = allTheShared.indexOf(charString, idx + 1)
-    }
+        idx = allTheShared.indexOf(charString, idx + 1);
+        increment++;
+        if (increment === 3) output = charString;
+      }
   });
-  
   return output;
 }
 
@@ -62,3 +63,5 @@ thirds.forEach((subArray) => {
 console.log(`Total for triplets is: ${skizore}`);
 
 // 1995 is too low
+// 2817 is the answer
+// Special thanks to Doogie for the nudge in the right direction
